@@ -1,6 +1,6 @@
 # AnalyticsGen
 
-Google Sheet Analytics Generator supported Flutter, Android, and iOS
+Google Sheet Analytics Generator Source Code supported Flutter, Android, and iOS
 
 ## Setup
 
