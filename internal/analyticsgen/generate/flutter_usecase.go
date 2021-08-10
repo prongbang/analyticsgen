@@ -216,13 +216,13 @@ func (f *flutterUc) BuildFunction(statement map[string]interface{}) string {
 	body += "\t\treturn _analyticsUtility.logEvent("
 	body += "AnalyticsLogEvent." + core.VariableCamel(core.ToString(statement["event"])) + ", {\n"
 	body += ""
-	body += "\t\t\t'category': AnalyticsCategory." + core.VariableCamel(core.ToString(statement["category"])) + ",\n"
+	body += "\t\t\t'event_category': AnalyticsCategory." + core.VariableCamel(core.ToString(statement["category"])) + ",\n"
 	if core.ToString(statement["action"]) != "" {
-		body += "\t\t\t'action': AnalyticsAction." + core.VariableCamel(core.ToString(statement["action"])) + ", \n"
+		body += "\t\t\t'event_action': AnalyticsAction." + core.VariableCamel(core.ToString(statement["action"])) + ", \n"
 	} else {
-		body += "\t\t\t'action': '', \n"
+		body += "\t\t\t'event_action': '', \n"
 	}
-	body += "\t\t\t'label': AnalyticsLabel." + core.VariableCamel(core.ToString(statement["label"])) + ",\n"
+	body += "\t\t\t'event_label': AnalyticsLabel." + core.VariableCamel(core.ToString(statement["label"])) + ",\n"
 	body += "\t\t\t'screen': AnalyticsScreenName." + core.VariableCamel(core.ToString(statement["screen"])) + ",\n"
 
 	var info = ""
