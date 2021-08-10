@@ -6,6 +6,7 @@ const (
 	Target   = "target"
 	Document = "document"
 	Sheet    = "sheet"
+	Package  = "package"
 )
 
 type Parameter struct {
@@ -14,4 +15,5 @@ type Parameter struct {
 	Target   string
 	Document string
 	Sheet    string
+	Package  string
 }

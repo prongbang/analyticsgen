@@ -8,6 +8,7 @@ import (
 	"github.com/prongbang/analyticsgen/pkg/parameter/asset"
 	"github.com/prongbang/analyticsgen/pkg/parameter/platform"
 	"github.com/prongbang/filex"
+	"strings"
 )
 
 const (
@@ -34,33 +35,40 @@ func (a *analyticsGen) Process(params *parameter.Parameter) {
 	sheet := sheets.Sheets{
 		Id:         params.Sheet,
 		DocumentId: params.Document,
+		Package:    params.Package,
 	}
 	if params.Platform == platform.Android {
-		if params.Asset == asset.Key {
+		if strings.Contains(params.Asset, asset.Key) {
 
-		} else if params.Asset == asset.Code {
+		}
+		if strings.Contains(params.Asset, asset.Code) {
 
-		} else if params.Asset == asset.Test {
+		}
+		if strings.Contains(params.Asset, asset.Test) {
 
 		}
 	} else if params.Platform == platform.Flutter {
-		if params.Asset == asset.Key {
+		if strings.Contains(params.Asset, asset.Key) {
 			code, err := a.FlutterUc.GenKey(sheet)
 			a.createFile(err, params.Target, FlutterAnalyticsKey, code)
-		} else if params.Asset == asset.Code {
+		}
+		if strings.Contains(params.Asset, asset.Code) {
 			code, err := a.FlutterUc.GenCode(sheet)
 			a.createFile(err, params.Target, FlutterAnalytics, code)
-		} else if params.Asset == asset.Test {
+		}
+		if strings.Contains(params.Asset, asset.Test) {
 
 		}
 	} else if params.Platform == platform.IOS {
-		if params.Asset == asset.Key {
+		if strings.Contains(params.Asset, asset.Key) {
 			code, err := a.IOSUc.GenKey(sheet)
 			a.createFile(err, params.Target, IOSAnalyticsKey, code)
-		} else if params.Asset == asset.Code {
+		}
+		if strings.Contains(params.Asset, asset.Code) {
 			code, err := a.IOSUc.GenCode(sheet)
 			a.createFile(err, params.Target, IOSAnalytics, code)
-		} else if params.Asset == asset.Test {
+		}
+		if strings.Contains(params.Asset, asset.Test) {
 
 		}
 	} else {
@@ -76,7 +84,7 @@ func (a *analyticsGen) createFile(err error, path string, filename string, data 
 		if err != nil {
 			fmt.Println("# Generate:", err)
 		} else {
-			fmt.Println("# Generate: Success")
+			fmt.Println("# Generate file " + path + "/" + filename + ": Success")
 		}
 	}
 }

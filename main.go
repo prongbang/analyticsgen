@@ -4,6 +4,7 @@ import (
 	"github.com/prongbang/analyticsgen/cmd"
 	"github.com/prongbang/analyticsgen/internal/pkg/common"
 	"github.com/prongbang/analyticsgen/pkg/parameter"
+	"github.com/prongbang/analyticsgen/pkg/parameter/asset"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
@@ -39,14 +40,23 @@ func main() {
 				Value: "",
 				Usage: "-sheet 0",
 			},
+			&cli.StringFlag{
+				Name:  "package",
+				Value: "",
+				Usage: "-package firebasex/analytics",
+			},
 		},
 		Action: func(c *cli.Context) error {
+			if c.String(parameter.Asset) == "" {
+				_ = c.Set(parameter.Asset, asset.All)
+			}
 			return cmd.Run(&parameter.Parameter{
 				Platform: c.String(parameter.Platform),
 				Asset:    c.String(parameter.Asset),
 				Target:   c.String(parameter.Target),
 				Document: c.String(parameter.Document),
 				Sheet:    c.String(parameter.Sheet),
+				Package:  c.String(parameter.Package),
 			})
 		},
 	}

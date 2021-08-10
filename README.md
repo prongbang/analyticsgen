@@ -26,21 +26,45 @@ https://docs.google.com/spreadsheets/d/1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq
 
 ## Usage
 
-- Flutter
+### Flutter
+
+- Gen all
 
 ```shell
-$ analyticsgen -platform flutter -asset key -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
-$ analyticsgen -platform flutter -asset code -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
+$ analyticsgen -platform flutter -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export -package firebasex/analytics
 ```
 
-- iOS
+- Gen by asset
+
+```shell
+$ analyticsgen -platform flutter -asset key -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export -package firebasex/analytics
+$ analyticsgen -platform flutter -asset code -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export -package firebasex/analytics
+```
+
+### iOS
+
+- Gen all
+
+```shell
+$ analyticsgen -platform ios -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
+```
+
+- Gen by asset
 
 ```shell
 $ analyticsgen -platform ios -asset key -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
 $ analyticsgen -platform ios -asset code -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
 ```
 
-- Android
+### Android
+
+- Gen all
+
+```shell
+$ analyticsgen -platform android -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
+```
+
+- Gen by asset
 
 ```shell
 $ analyticsgen -platform android -asset key -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export

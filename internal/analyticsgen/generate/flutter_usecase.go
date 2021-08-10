@@ -92,14 +92,21 @@ func (f *flutterUc) GenCode(sheet sheets.Sheets) (string, error) {
 	var keys = core.GetMapKeys(functions)
 
 	var contents = ""
-	contents += "import 'package:firebasex/analytics/analytics_key.dart';\n"
-	contents += "import 'package:firebasex/analytics/analytics_utility.dart';\n"
-	contents += "\n"
+	if sheet.Package != "" {
+		contents += "import 'package:" + sheet.Package + "/analytics_key.dart';\n"
+		contents += "import 'package:" + sheet.Package + "/analytics_utility.dart';\n"
+		contents += "\n"
+	}
 	contents += "class Analytics {\n"
 	contents += "\n"
 	contents += "\tfinal AnalyticsUtility _analyticsUtility;\n"
 	contents += "\n"
 	contents += "\tAnalytics(this._analyticsUtility);\n"
+	contents += "\n"
+	contents += "\tFuture<void> logScreen(String screenName, {String screenClassOverride}) {\n"
+	contents += "\t\treturn _analyticsUtility.logScreen(screenName,\n"
+	contents += "\t\t\tscreenClassOverride: screenClassOverride);\n"
+	contents += "\t}"
 
 	var body = "\n"
 	for k := range keys {
@@ -205,7 +212,7 @@ func (f *flutterUc) BuildFunction(statement map[string]interface{}) string {
 	var body = ""
 	body += "\n\t" + core.ToString(statement["name"]) + " {\n"
 	body += "\t\treturn _analyticsUtility.logEvent("
-	body += "AnalyticsLogEvent." + core.VariableCamel(core.ToString(statement["event"])) + ", \n"
+	body += "AnalyticsLogEvent." + core.VariableCamel(core.ToString(statement["event"])) + ", {\n"
 	body += ""
 	body += "\t\t\t'category': AnalyticsCategory." + core.VariableCamel(core.ToString(statement["category"])) + ",\n"
 	if core.ToString(statement["action"]) != "" {
@@ -219,25 +226,22 @@ func (f *flutterUc) BuildFunction(statement map[string]interface{}) string {
 	var info = ""
 	var infoKeys = core.GetMapKeys(statement["informationKey"])
 	if len(infoKeys) > 0 {
-		body += "\t\t\t'information': {\n"
 		for i := range infoKeys {
 			var key = fmt.Sprintf("%s", infoKeys[i])
 			information := statement["informationKey"].(map[string]map[string]string)
 			var value = information[key]["value"]
 			var types = information[key]["type"]
 			if types == "String" {
-				info += "\t\t\t\t'" + value + "': " + core.VariableCamel(value)
+				info += "\t\t\t'" + value + "': " + core.VariableCamel(value)
 			} else {
-				info += "\t\t\t\t'" + value + "': " + core.VariableCamel(value) + ".value"
+				info += "\t\t\t'" + value + "': " + core.VariableCamel(value) + ".value"
 			}
 			info += ",\n"
 		}
 		body += info
-		body += "\t\t\t},\n"
-		body += "\t\t);\n"
+		body += "\t\t});\n"
 	} else {
-		body += "\t\t\t'information': {},\n"
-		body += "\t\t);\n"
+		body += "\t\t});\n"
 	}
 	body += "\t}\n"
 	return body
