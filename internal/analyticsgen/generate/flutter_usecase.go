@@ -31,6 +31,7 @@ func (f *flutterUc) GenKey(sheet sheets.Sheets) (string, error) {
 			extensions += "\t\tswitch (this) {\n"
 
 			header := "enum Analytics" + Topics[i] + " {\n"
+			header += "\tidle\n"
 			if mapTopic[Topics[i]] == "" {
 				mapTopic[Topics[i]] = "1"
 				mapKey = map[string]string{}
