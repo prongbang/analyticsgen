@@ -164,18 +164,19 @@ func (f *flutterUc) PrepareFunction(values csvx.CsvList) map[string][]interface{
 			}
 		} else {
 			if infoKey != "" {
+				paramsSize := fmt.Sprintf("%d", len(strings.Split(params, ",")))
 				if infoValue != "" {
 					informationKeys[infoKeyArgs] = map[string]string{
 						"value": infoKey,
 						"type":  "InformationValue",
 					}
-					params = "(" + params + "AnalyticsInformationValue " + core.VariableCamel(infoKey) + ")"
+					params = "WithParams(" + params + "AnalyticsInformationValue " + core.VariableCamel(infoKey) + ")"
 				} else {
 					informationKeys[infoKeyArgs] = map[string]string{
 						"value": infoKey,
 						"type":  "String",
 					}
-					params = "(" + params + "String " + core.VariableCamel(infoKey) + ")"
+					params = "With" + paramsSize + "Params(" + params + "String " + core.VariableCamel(infoKey) + ")"
 				}
 			} else {
 				informationKeys = map[string]map[string]string{}
