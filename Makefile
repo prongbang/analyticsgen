@@ -17,7 +17,7 @@ build_linux:
 	env GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o ./binary/linux/analyticsgen github.com/prongbang/analyticsgen
 
 build_macos:
-	env GOOS=darwin go build -ldflags "-w" -o ./binary/macos/analyticsgen github.com/prongbang/analyticsgen && chmod +x ./binary/macos/analyticsgen
+	env GOOS=darwin go build -ldflags "-w" -o ./analyticsgen github.com/prongbang/analyticsgen && chmod +x ./analyticsgen
 
 build_window:
 	env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o ./binary/windows/analyticsgen.exe github.com/prongbang/analyticsgen
