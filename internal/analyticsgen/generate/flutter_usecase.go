@@ -107,7 +107,15 @@ func (f *flutterUc) GenCode(sheet sheets.Sheets) (string, error) {
 	contents += "\tFuture<void> logScreen(String screenName, {String screenClassOverride = ''}) {\n"
 	contents += "\t\treturn _analyticsUtility.logScreen(screenName,\n"
 	contents += "\t\t\tscreenClassOverride: screenClassOverride);\n"
-	contents += "\t}"
+	contents += "\t}\n"
+	contents += "\n"
+	contents += "\tFuture<void> logAppOpen() => _analyticsUtility.logAppOpen();\n"
+	contents += "\n"
+	contents += "\tFuture<void> logEvent(String key, Map<String, dynamic> parameters) =>\n"
+	contents += "\t\t_analyticsUtility.logEvent(key, parameters);\n"
+	contents += "\n"
+	contents += "\tFuture<void> setUserProperty(String key, String value) =>\n"
+	contents += "\t\t_analyticsUtility.setUserProperty(key, value);"
 
 	var body = "\n"
 	for k := range keys {
