@@ -60,6 +60,47 @@ $ analyticsgen -platform flutter -asset key -sheet 0 -document 1oBqyd7ys2GOtroqV
 $ analyticsgen -platform flutter -asset code -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export -package firebasex/analytics
 ```
 
+- Add `analytics_utility.dart` file into project
+
+```dart
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+abstract class AnalyticsUtility {
+  Future<void> logAppOpen();
+
+  Future<void> logEvent(String key, Map<String, dynamic> parameters);
+
+  Future<void> setUserProperty(String key, String value);
+
+  Future<void> logScreen(String screenName, {String screenClassOverride});
+}
+
+class FirebaseAnalyticsUtility implements AnalyticsUtility {
+  final FirebaseAnalytics _firebaseAnalytics;
+
+  FirebaseAnalyticsUtility(this._firebaseAnalytics);
+
+  @override
+  Future<void> logAppOpen() => _firebaseAnalytics.logAppOpen();
+
+  @override
+  Future<void> logEvent(String key, Map<String, dynamic> parameters) =>
+      _firebaseAnalytics.logEvent(name: key, parameters: parameters);
+
+  @override
+  Future<void> setUserProperty(String key, String value) =>
+      _firebaseAnalytics.setUserProperty(name: key, value: value);
+
+  @override
+  Future<void> logScreen(String screenName,
+          {String screenClassOverride = 'Flutter'}) =>
+      _firebaseAnalytics.setCurrentScreen(
+        screenName: screenName,
+        screenClassOverride: screenClassOverride,
+      );
+}
+```
+
 ### iOS
 
 - Gen all
