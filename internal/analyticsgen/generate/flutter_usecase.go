@@ -31,7 +31,7 @@ func (f *flutterUc) GenKey(sheet sheets.Sheets) (string, error) {
 			extensions += "\t\tswitch (this) {\n"
 
 			header := "enum Analytics" + Topics[i] + " {\n"
-			header += "\tidle\n"
+			header += "\tidle,\n"
 			if mapTopic[Topics[i]] == "" {
 				mapTopic[Topics[i]] = "1"
 				mapKey = map[string]string{}
@@ -106,7 +106,7 @@ func (f *flutterUc) GenCode(sheet sheets.Sheets) (string, error) {
 	contents += "\n"
 	contents += "\tFuture<void> logScreen(String screenName, {String screenClassOverride}) {\n"
 	contents += "\t\treturn _analyticsUtility.logScreen(screenName,\n"
-	contents += "\t\t\tscreenClassOverride: screenClassOverride);\n"
+	contents += "\t\t\tscreenClassOverride: screenClassOverride = '');\n"
 	contents += "\t}"
 
 	var body = "\n"
