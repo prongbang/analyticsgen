@@ -104,9 +104,9 @@ func (f *flutterUc) GenCode(sheet sheets.Sheets) (string, error) {
 	contents += "\n"
 	contents += "\tAnalytics(this._analyticsUtility);\n"
 	contents += "\n"
-	contents += "\tFuture<void> logScreen(String screenName, {String screenClassOverride}) {\n"
+	contents += "\tFuture<void> logScreen(String screenName, {String screenClassOverride = ''}) {\n"
 	contents += "\t\treturn _analyticsUtility.logScreen(screenName,\n"
-	contents += "\t\t\tscreenClassOverride: screenClassOverride = '');\n"
+	contents += "\t\t\tscreenClassOverride: screenClassOverride);\n"
 	contents += "\t}"
 
 	var body = "\n"
