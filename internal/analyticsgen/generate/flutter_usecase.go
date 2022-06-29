@@ -136,9 +136,8 @@ func (f *flutterUc) PrepareFunction(values csvx.CsvList) map[string][]interface{
 	informationKeys := map[string]map[string]string{}
 	params := ""
 
-	for r := 1; r < len(values)-1; r++ {
+	for r := 1; r < len(values); r++ {
 		var row = values[r]
-		var next = values[r+1]
 
 		var category = row[0]
 		var screen = row[1]
@@ -149,13 +148,22 @@ func (f *flutterUc) PrepareFunction(values csvx.CsvList) map[string][]interface{
 		var infoValue = strings.Trim(row[6], " ")
 		var functionName = row[7]
 
-		var screenNext = next[1]
-		var logEventNext = next[2]
-		var labelNext = next[3]
-		var actionNext = next[4]
-
 		var funcName = ""
 		var infoKeyArgs = category + "_" + infoKey
+
+		// Check has next screen
+		hasNext := r+1 < len(values)
+		var screenNext = ""
+		var logEventNext = ""
+		var labelNext = ""
+		var actionNext = ""
+		if hasNext {
+			var next = values[r+1]
+			screenNext = next[1]
+			logEventNext = next[2]
+			labelNext = next[3]
+			actionNext = next[4]
+		}
 
 		if screen == screenNext && logEvent == logEventNext && label == labelNext && action == actionNext {
 			if infoValue != "" {

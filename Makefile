@@ -14,10 +14,10 @@ ios_code:
 	go run main.go -platform ios -asset code -sheet 0 -document 1oBqyd7ys2GOtroqV6D4qYH6JWQjKrZiOcngmcsbq0VU -target ./export
 
 build_linux:
-	env GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o ./binary/linux/analyticsgen github.com/prongbang/analyticsgen
+	env GOOS=linux GOARCH=arm64 go build -ldflags "-s -w" -o ./bin/linux/analyticsgen github.com/prongbang/analyticsgen && chmod +x ./bin/linux/analyticsgen
 
 build_macos:
-	env GOOS=darwin go build -ldflags "-w" -o ./analyticsgen github.com/prongbang/analyticsgen && chmod +x ./analyticsgen
+	env GOOS=darwin go build -ldflags "-w" -o ./analyticsgen -o ./bin/macos/analyticsgen github.com/prongbang/analyticsgen && chmod +x ./bin/macos/analyticsgen
 
 build_window:
-	env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o ./binary/windows/analyticsgen.exe github.com/prongbang/analyticsgen
+	env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o ./bin/windows/analyticsgen.exe github.com/prongbang/analyticsgen

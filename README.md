@@ -14,9 +14,9 @@ $ brew install analyticsgen
 
 ### Binary
 
-- [macOS](https://github.com/prongbang/analyticsgen/blob/master/analyticsgen?raw=true)
-- [Linux](https://github.com/prongbang/analyticsgen/blob/master/binary/linux/analyticsgen?raw=true)
-- [Mindows](https://github.com/prongbang/analyticsgen/blob/master/binary/windows/analyticsgen.exe?raw=true)
+- [macOS](https://github.com/prongbang/analyticsgen/blob/master/bin/macos/analyticsgen?raw=true)
+- [Linux](https://github.com/prongbang/analyticsgen/blob/master/bin/linux/analyticsgen?raw=true)
+- [Mindows](https://github.com/prongbang/analyticsgen/blob/master/bin/windows/analyticsgen.exe?raw=true)
 
 
 ### Golang
