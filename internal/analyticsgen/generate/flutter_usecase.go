@@ -2,10 +2,11 @@ package generate
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/prongbang/analyticsgen/internal/analyticsgen/sheets"
 	"github.com/prongbang/analyticsgen/pkg/core"
 	"github.com/prongbang/analyticsgen/pkg/csvx"
-	"strings"
 )
 
 type FlutterUseCase interface {
@@ -72,7 +73,7 @@ func (f *flutterUc) GenKey(sheet sheets.Sheets) (string, error) {
 			for n := 1; n < len(values); n++ {
 				cell := values[n][i]
 				key := strings.ToLower(cell)
-				typeCate := "\tstatic final String " + core.VariableCamel(key) + " = '" + key + "';\n"
+				typeCate := "\tstatic const String " + core.VariableCamel(key) + " = '" + key + "';\n"
 				if mapKey[key] == "" && key != "" {
 					mapKey[key] = "1"
 					body += typeCate
